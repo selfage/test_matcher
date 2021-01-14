@@ -1,0 +1,29 @@
+{
+  "name": "@selfage/test_matcher",
+  "version": "0.0.1",
+  "description": "A collection of handy test matchers.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selfage/test_matcher.git"
+  },
+  "keywords": [
+    "Matcher",
+    "Counter",
+    "Observable",
+    "Unit test"
+  ],
+  "author": "Yuxuan Xie <teststaybaka@gmail.com> (http://www.yuxuanxie.com)",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/selfage/test_matcher/issues"
+  },
+  "homepage": "https://github.com/selfage/test_matcher#readme",
+  "dependencies": {
+    "@selfage/counter": "^1.0.4",
+    "@selfage/observable_array": "^1.0.3",
+    "@selfage/test_base": "^1.0.6"
+  },
+  "devDependencies": {
+    "@selfage/tsconfig": "^1.0.1"
+  }
+}
