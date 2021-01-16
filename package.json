@@ -1,6 +1,6 @@
 {
   "name": "@selfage/test_matcher",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A collection of handy test matchers.",
   "repository": {
     "type": "git",
