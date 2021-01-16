@@ -13,6 +13,7 @@ Written in TypeScript and compiled to ES6. Provides an extended collection of te
 ```TypeScript
 import { eqCounter } from '@selfage/test_matcher/counter_matcher';
 import { Counter } from '@selfage/counter'; // Install `@selfage/counter`.
+import { assertThat, eq } from '@selfage/test_base/matcher'; // Install `@selfage/test_base`.
 
 let counter = new Counter<string>();
 counter.increment('key1');
@@ -26,6 +27,7 @@ assertThat(counter, eqCounter([eq('key1'), 1], [eq('key2', 10)]), 'counter');
 ```TypeScript
 import { eqObservableArray } from '@selfage/test_matcher/observable_array_matcher';
 import { ObservableArray } from '@selfage/observable_array'; // Install `@selfage/observable_array`.
+import { assertThat, eq } from '@selfage/test_base/matcher'; // Install `@selfage/test_base`.
 
 let ob = new ObservableArray<number>();
 ob.push(10, 11, 12, 13, 14);
