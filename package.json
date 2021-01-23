@@ -1,6 +1,6 @@
 {
   "name": "@selfage/test_matcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of handy test matchers.",
   "repository": {
     "type": "git",
@@ -8,8 +8,6 @@
   },
   "keywords": [
     "Matcher",
-    "Counter",
-    "Observable",
     "Unit test"
   ],
   "author": "Yuxuan Xie <teststaybaka@gmail.com> (http://www.yuxuanxie.com)",
@@ -18,11 +16,8 @@
     "url": "https://github.com/selfage/test_matcher/issues"
   },
   "homepage": "https://github.com/selfage/test_matcher#readme",
-  "dependencies": {
-    "@selfage/counter": "^1.0.4",
-    "@selfage/observable_array": "^1.0.3",
-    "@selfage/test_base": "^1.0.6"
-  },
+  "main": "./matcher.js",
+  "types": "./matcher.d.ts",
   "devDependencies": {
     "@selfage/tsconfig": "^1.0.3",
     "typescript": "^4.1.3"
