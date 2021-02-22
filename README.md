@@ -4,9 +4,7 @@
 `npm install @selfage/test_matcher`
 
 ## Overview
-Written in TypeScript and compiled to ES6. Provides basic assertions and
-matchers, which can be easily extended to custom data structures, promoting a
-framework or a pattern for matching actual value with expected in tests. 
+Written in TypeScript and compiled to ES6 with inline source map & source. See [@selfage/tsconfig](https://www.npmjs.com/package/@selfage/tsconfig) for full compiler options. Provides basic assertions and matchers, which can be easily extended to custom data structures, promoting a framework or a pattern for matching actual value with expected in tests.
 
 ## Basic matchers
 
