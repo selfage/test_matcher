@@ -63,15 +63,15 @@ assertThat(actual, eqMap(), `actual`);
 ## Assert upon error
 
 Often we need to assert when a function throws an error, which can be helped by
-`assertRejection()`, `assertThrow()`, and `eqError()`.
+`assertReject()`, `assertThrow()`, and `eqError()`.
 
 ```TypeScript
 import {
-  assertThat, assertRejection, assertThrow, eqError
+  assertThat, assertReject, assertThrow, eqError
 } from '@selfage/test_matcher';
 
 // Suppose we are in an async function.
-let e = await assertRejection(() => {
+let e = await assertReject(() => {
   return Promise.reject(new Error('It has to fail.'));
 });
 // `eqError()` expects the `actual` to be of `Error` type, to have the expected

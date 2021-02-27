@@ -8,7 +8,7 @@ export function assert(
   }
 }
 
-export async function assertRejection(promise: Promise<any>) {
+export async function assertReject(promise: Promise<any>) {
   try {
     await promise;
   } catch (e) {
