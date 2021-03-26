@@ -31,13 +31,16 @@ assertThat(actual, eq(expected), `actual`);
 // `actual` must be a string that contains the expected text.
 assertThat(actual, containStr('expected text'), `actual`);
 
+// `actual` can be anything and will be ignored or always succeed.
+assertThat(actual, ignore(), `actual`);
+
 // `actual` must be an array of only one type.
 // eqArray() takes an array of matchers to match each element from `actual`.
 assertThat(actual, eqArray([eq(1), eq(2)]), `actual`);
 // Therefore it can also be used like this.
 assertThat(
   actual,
-  eqArray([containStr('expected1'), containStr('expected2')]),
+  eqArray([containStr('expected1'), eq('expected2'), ignore()]),
   `actual`);
 // If `actual` is undefined, it can be matched as the following.
 assertThat(actual, eqArray(), `actual`);

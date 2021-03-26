@@ -41,6 +41,10 @@ export function assertThat<T>(
   }
 }
 
+export function ignore<T>(): MatchFn<T> {
+  return (actual) => {};
+}
+
 export function eq<T>(expected: T): MatchFn<T> {
   return (actual) => {
     assert(expected === actual, `${expected}`, `${actual}`);
