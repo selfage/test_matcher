@@ -26,6 +26,21 @@ export function assertThrow(method: () => void) {
   throw new Error("Failed to assert an error to be thrown.");
 }
 
+export type AsyncMatchFn<T> = (actual: T) => Promise<void>;
+
+export async function asyncAssertThat<T>(
+  actual: T,
+  asyncMatch: AsyncMatchFn<T>,
+  targetName: string
+): Promise<void> {
+  try {
+    await asyncMatch(actual);
+  } catch (e) {
+    e.message = `When matching ${targetName}:\n${e.message}`;
+    throw e;
+  }
+}
+
 export type MatchFn<T> = (actual: T) => void;
 
 export function assertThat<T>(

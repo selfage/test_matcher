@@ -120,7 +120,7 @@ assertThat(actual, eqUser(expected), `actual`);
 // The `T` in `MatchFn<T>` is the usually the type of the actual value you want
 // to match. In this case, `T` should be `User`. eqUser() is just an example
 // name which is really up to you. But following this naming convention makes
-// the assertion statement reads more naturally. 
+// the assertion statement reads more naturally.
 function eqUser(expected?: User): MatchFn<User> {
   // `MatchFn<T>` is just an alias of a function type.
   // type MatchFn<T> = (actual: T) => void;
@@ -201,4 +201,18 @@ function eqUserWithOptions(expected?: User, ignoreId: boolean): MatchFn<User> {
   };
 }
 assertThat(actual, eqUserWithOptions(expected, true), `actual`);
+```
+
+## Async matcher
+
+There are no out-of-the-box matchers that are async. But in case you need customized matchers to do async things, such as reading from files, you can implement `AsyncMatcherFn<T>` which returns `Promise<void>`, and assert with `asyncAssertThat()`.
+
+```TypeScript
+function asyncEq(expected: number): AsyncMatcherFn<number> {
+  return async (actual) => {
+    await ...
+  }
+}
+
+await asyncAssertThat(actual, asyncEq(expected), `actual`);
 ```
