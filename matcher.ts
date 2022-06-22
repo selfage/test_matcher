@@ -68,7 +68,7 @@ export function eq<T>(expected: T): MatchFn<T> {
 
 export function containStr(expected: string): MatchFn<string> {
   return (actual) => {
-    assertThat(typeof actual, eq("string"), "type");
+    assert(Boolean(actual), `to not be null`, `null`);
     assert(actual.indexOf(expected) != -1, `containing ${expected}`, actual);
   };
 }
@@ -79,7 +79,7 @@ export function eqArray<T>(expected?: Array<MatchFn<T>>): MatchFn<Array<T>> {
       assertThat(actual, eq(undefined), "nullity");
       return;
     }
-    assert(!actual, `to not be null`, `null`);
+    assert(Boolean(actual), `to not be null`, `null`);
     assertThat(actual.length, eq(expected.length), `array length`);
     for (let i = 0; i < actual.length; i++) {
       assertThat(actual[i], expected[i], `${i}th element`);
@@ -94,7 +94,7 @@ export function eqSet<T>(expected?: Array<MatchFn<T>>): MatchFn<Set<T>> {
       assertThat(actual, eq(undefined), "nullity");
       return;
     }
-    assert(!actual, `to not be null`, `null`);
+    assert(Boolean(actual), `to not be null`, `null`);
     assertThat(actual.size, eq(expected.length), `set size`);
     let i = 0;
     for (let value of actual) {
@@ -113,7 +113,7 @@ export function eqMap<K, V>(
       assertThat(actual, eq(undefined), "nullity");
       return;
     }
-    assert(!actual, `to not be null`, `null`);
+    assert(Boolean(actual), `to not be null`, `null`);
     assertThat(actual.size, eq(expected.length), `map size`);
     let i = 0;
     for (let [key, value] of actual) {
