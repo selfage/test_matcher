@@ -87,6 +87,47 @@ export function eqArray<T>(expected?: Array<MatchFn<T>>): MatchFn<Array<T>> {
   };
 }
 
+export function containUnorderedElements<T>(
+  expectedMatchers?: Array<MatchFn<T>>
+): MatchFn<Array<T>> {
+  return (actual) => {
+    assert(Boolean(actual), `to not be null`, `null`);
+    let matchedIndex = new Set<number>();
+    for (let i = 0; i < expectedMatchers.length; i++) {
+      let matched = false;
+      for (let j = 0; j < actual.length; j++) {
+        if (matchedIndex.has(j)) {
+          continue;
+        }
+
+        try {
+          expectedMatchers[i](actual[j]);
+          matched = true;
+          matchedIndex.add(j);
+          break;
+        } catch (e) {}
+      }
+      if (!matched) {
+        throw new Error(`Cannot match the ${i}th expected element.`);
+      }
+    }
+  };
+}
+
+export function eqUnorderedArray<T>(
+  expected?: Array<MatchFn<T>>
+): MatchFn<Array<T>> {
+  return (actual) => {
+    assert(Boolean(actual), `to not be null`, `null`);
+    assertThat(actual.length, eq(expected.length), `array length`);
+    assertThat(
+      actual,
+      containUnorderedElements(expected),
+      `unordered elements`
+    );
+  };
+}
+
 // Match Set in insertion order.
 export function eqSet<T>(expected?: Array<MatchFn<T>>): MatchFn<Set<T>> {
   return (actual) => {
