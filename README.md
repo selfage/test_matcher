@@ -15,7 +15,7 @@ error messages, and reads more naturally.
 ```TypeScript
 // import other stuff...
 import {
-  assertThat, eq, containStr, eqArray, eqSet, eqMap
+  assertThat, eq, containStr, isArray, isSet, isMap
 } from "@selfage/test_matcher";
 
 // Usually called within a test case, if assertThat() fails, it throws an error
@@ -35,32 +35,32 @@ assertThat(actual, containStr('expected text'), `actual`);
 assertThat(actual, ignore(), `actual`);
 
 // `actual` must be an array of only one type.
-// eqArray() takes an array of matchers to match each element from `actual`.
-assertThat(actual, eqArray([eq(1), eq(2)]), `actual`);
+// isArray() takes an array of matchers to match each element from `actual`.
+assertThat(actual, isArray([eq(1), eq(2)]), `actual`);
 // Therefore it can also be used like this.
 assertThat(
   actual,
-  eqArray([containStr('expected1'), eq('expected2'), ignore()]),
+  isArray([containStr('expected1'), eq('expected2'), ignore()]),
   `actual`);
 // If `actual` is undefined, it can be matched as the following.
-assertThat(actual, eqArray(), `actual`);
+assertThat(actual, isArray(), `actual`);
 
 // `actual` must be a Set of only one type.
-// eqSet() also takes an array of matchers just like eqArray() to match Set in
+// isSet() also takes an array of matchers just like isArray() to match Set in
 // insertion order.
-assertThat(actual, eqSet([eq(1), eq(2)]), `actual`);
+assertThat(actual, isSet([eq(1), eq(2)]), `actual`);
 // If `actual` is undefined, it can be matched as the following.
-assertThat(actual, eqSet(), `actual`);
+assertThat(actual, isSet(), `actual`);
 
 // `actual` must be a Map of one key type and one value type.
-// eqMap() takes an array of pairs of matchers, to match key and value in
+// isMap() takes an array of pairs of matchers, to match key and value in
 // insertion order.
 assertThat(
   actual,
-  eqMap([[eq('key'), eq('value')], [eq('key2'), eq('value2')]]),
+  isMap([[eq('key'), eq('value')], [eq('key2'), eq('value2')]]),
   `actual`);
 // If `actual` is undefined, it can be matched as the following.
-assertThat(actual, eqMap(), `actual`);
+assertThat(actual, isMap(), `actual`);
 ```
 
 ## Assert upon error
@@ -96,7 +96,7 @@ test. A customized matcher can help to ease the matching process.
 
 ```TypeScript
 import {
-  assert, assertThat, eq, eqArray, MatchFn
+  assert, assertThat, eq, isArray, MatchFn
 } from '@selfage/test_matcher';
 
 // Suppose we define the following interfaces as data classes.
@@ -131,7 +131,7 @@ function eqUser(expected?: User): MatchFn<User> {
     // When using assertThat(), the last argument `targetName` is used to
     // construct `When matching ${targetName}:` and it needs to be descriptive
     // enough for you to locate the failure within this matcher, because
-    // `eqUser()` can be used inside other matchers, such as eqArray().
+    // `eqUser()` can be used inside other matchers, such as isArray().
     if (expected === undefined) {
       // Supports matching when we expect `actual` to be undefined.
       assertThat(actual, eq(undefined), `nullity`);
@@ -142,11 +142,11 @@ function eqUser(expected?: User): MatchFn<User> {
     // array needs to be undefined in that case as well.
     let channelIds: MatchFn<number>[];
     if (expected.channelIds) {
-      // Because eqArray() takes an array of matchers, we need to convert
+      // Because isArray() takes an array of matchers, we need to convert
       // `expected.channelIds` into `MatchFn<number>[]`.
       channelIds = expected.channelIds.map((channelId) => eq(channelId));
     }
-    assertThat(actual.channelIds, eqArray(channelIds), `channelIds field`);
+    assertThat(actual.channelIds, isArray(channelIds), `channelIds field`);
     // Similarly, let's convert `expected.creditCards` into
     // `MatchFn<CreditCard>[]`.
     let creditCards: MatchFn<CreditCard>[];
@@ -156,7 +156,7 @@ function eqUser(expected?: User): MatchFn<User> {
         (channelId) => eqCreditCard(channelId)
       );
     }
-    assertThat(actual.creditCards, eqArray(creditCards), `creditCards field`);
+    assertThat(actual.creditCards, isArray(creditCards), `creditCards field`);
   };
 }
 

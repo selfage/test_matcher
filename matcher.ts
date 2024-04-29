@@ -56,13 +56,60 @@ export function assertThat<T>(
   }
 }
 
-export function ignore<T>(): MatchFn<T> {
+export function any<T>(): MatchFn<T> {
   return (actual) => {};
 }
 
 export function eq<T>(expected: T): MatchFn<T> {
   return (actual) => {
     assert(expected === actual, `${expected}`, `${actual}`);
+  };
+}
+
+// Greater than
+export function gt(expected: number): MatchFn<number> {
+  return (actual) => {
+    assert(actual > expected, `> ${expected}`, `${actual}`);
+  };
+}
+
+// Greater and equal
+export function ge(expected: number): MatchFn<number> {
+  return (actual) => {
+    assert(actual >= expected, `>= ${expected}`, `${actual}`);
+  };
+}
+
+// Less than
+export function lt(expected: number): MatchFn<number> {
+  return (actual) => {
+    assert(actual < expected, `< ${expected}`, `${actual}`);
+  };
+}
+
+// Less and equal
+export function le(expected: number): MatchFn<number> {
+  return (actual) => {
+    assert(actual <= expected, `<= ${expected}`, `${actual}`);
+  };
+}
+
+// Equal approximately
+export function eqAppr(
+  expected: number,
+  deviation: number = 0.01
+): MatchFn<number> {
+  return (actual) => {
+    assert(
+      actual >= expected * (1 - deviation),
+      `to equal approximately to ${expected}`,
+      `${actual}`
+    );
+    assert(
+      actual <= expected * (1 + deviation),
+      `to equal approximately to ${expected}`,
+      `${actual}`
+    );
   };
 }
 
@@ -73,7 +120,7 @@ export function containStr(expected: string): MatchFn<string> {
   };
 }
 
-export function eqArray<T>(expected?: Array<MatchFn<T>>): MatchFn<Array<T>> {
+export function isArray<T>(expected?: Array<MatchFn<T>>): MatchFn<Array<T>> {
   return (actual) => {
     if (expected === undefined) {
       assertThat(actual, eq(undefined), "nullity");
@@ -114,7 +161,7 @@ export function containUnorderedElements<T>(
   };
 }
 
-export function eqUnorderedArray<T>(
+export function isUnorderedArray<T>(
   expected?: Array<MatchFn<T>>
 ): MatchFn<Array<T>> {
   return (actual) => {
@@ -129,7 +176,7 @@ export function eqUnorderedArray<T>(
 }
 
 // Match Set in insertion order.
-export function eqSet<T>(expected?: Array<MatchFn<T>>): MatchFn<Set<T>> {
+export function isSet<T>(expected?: Array<MatchFn<T>>): MatchFn<Set<T>> {
   return (actual) => {
     if (expected === undefined) {
       assertThat(actual, eq(undefined), "nullity");
@@ -146,7 +193,7 @@ export function eqSet<T>(expected?: Array<MatchFn<T>>): MatchFn<Set<T>> {
 }
 
 // Match Map in insertion order.
-export function eqMap<K, V>(
+export function isMap<K, V>(
   expected?: Array<[MatchFn<K>, MatchFn<V>]>
 ): MatchFn<Map<K, V>> {
   return (actual) => {
