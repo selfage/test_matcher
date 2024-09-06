@@ -72,10 +72,11 @@ export function eqStr(expected: string): MatchFn<string> {
       assertThat(actual, eq(undefined), "nullity");
       return;
     }
-    assertThat(actual.length, eq(expected.length), "string length");
-    for (let i = 0; i < actual.length; i++) {
+    let minLength = Math.min(actual.length, expected.length);
+    for (let i = 0; i < minLength; i++) {
       assertThat(actual[i], eq(expected[i]), `string at position ${i}`);
     }
+    assertThat(actual.length, eq(expected.length), "string length");
   };
 }
 
