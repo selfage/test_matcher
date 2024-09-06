@@ -66,6 +66,15 @@ export function eq<T>(expected: T): MatchFn<T> {
   };
 }
 
+export function eqStr(expected: string): MatchFn<string> {
+  return (actual) => {
+    assertThat(actual.length, eq(expected.length), "string length");
+    for (let i = 0; i < actual.length; i++) {
+      assertThat(actual[i], eq(expected[i]), `string at position ${i}`);
+    }
+  };
+}
+
 // Greater than
 export function gt(expected: number): MatchFn<number> {
   return (actual) => {
