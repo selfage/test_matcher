@@ -68,6 +68,10 @@ export function eq<T>(expected: T): MatchFn<T> {
 
 export function eqStr(expected: string): MatchFn<string> {
   return (actual) => {
+    if (expected === undefined) {
+      assertThat(actual, eq(undefined), "nullity");
+      return;
+    }
     assertThat(actual.length, eq(expected.length), "string length");
     for (let i = 0; i < actual.length; i++) {
       assertThat(actual[i], eq(expected[i]), `string at position ${i}`);
