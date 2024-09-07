@@ -66,7 +66,7 @@ export function eq<T>(expected: T): MatchFn<T> {
   };
 }
 
-export function eqStr(expected: string): MatchFn<string> {
+export function eqLongStr(expected: string): MatchFn<string> {
   return (actual) => {
     if (expected === undefined) {
       assertThat(actual, eq(undefined), "nullity");
