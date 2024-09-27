@@ -66,6 +66,12 @@ export function eq<T>(expected: T): MatchFn<T> {
   };
 }
 
+export function ne<T>(expected: T): MatchFn<T> {
+  return (actual) => {
+    assert(expected !== actual, `not equal to ${expected}`, `${actual}`);
+  };
+}
+
 export function eqLongStr(expected: string): MatchFn<string> {
   return (actual) => {
     if (expected === undefined) {
