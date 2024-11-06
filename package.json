@@ -1,6 +1,6 @@
 {
   "name": "@selfage/test_matcher",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "A pattern to match actual value with expected in tests.",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   ],
   "devDependencies": {
     "@selfage/cli": "^5.0.0",
-    "@selfage/tsconfig": "^1.0.7",
+    "@selfage/tsconfig": "^1.1.0",
     "typescript": "^5.4.5"
   }
 }
