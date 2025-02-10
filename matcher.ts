@@ -82,7 +82,7 @@ export function eqLongStr(expected: string): MatchFn<string> {
     for (let i = 0; i < minLength; i++) {
       assertThat(actual.charCodeAt(i), eq(expected.charCodeAt(i)), `char code at position ${i}, with expected string ${expected} and actual string ${actual}`);
     }
-    assertThat(actual.length, eq(expected.length), "string length");
+    assertThat(actual.length, eq(expected.length), `string length, with expected string ${expected} and actual string ${actual}`);
   };
 }
 
